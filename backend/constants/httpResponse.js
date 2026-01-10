@@ -11,7 +11,8 @@ export const Messege = {
   // User
   USER_NOT_FOUND: "User not found",
   DRIVER_LIST_FETCHED: "Drivers fetched successfully",
-
+  USER_EXIST : "user already exist",
+  
   // Vehicles
   VEHICLE_CREATED: "Vehicle added to fleet",
   VEHICLE_UPDATED: "Vehicle updated successfully",
