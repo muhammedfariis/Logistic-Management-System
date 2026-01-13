@@ -15,3 +15,5 @@ const roleMiddleware = (...roles) => {
     next();
   };
 };
+
+export default roleMiddleware

@@ -4,6 +4,7 @@ import cors from "cors"
 import database from "../Logistics-Management-System/backend/config/database.js"
 import spinner from "../Logistics-Management-System/backend/design/ora.js"
 import authRouter from "./backend/authentication/src/routers/authRouter.js"
+import vehicleRouter from "./backend/vehicleManagement-1/src/routers/vehicleRoute.js"
 dotenv.config()
 // assigning server 
 
@@ -14,6 +15,7 @@ const PORT = process.env.PORT
 app.use(express.json())
 app.use(cors())
 app.use("/api/authentication" , authRouter)
+app.use("/api/vehicleassignations" , vehicleRouter)
 app.use(express.urlencoded({ extended: true }));
 
 database()

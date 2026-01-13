@@ -14,4 +14,8 @@ export class UserRepository extends BaseRepository {
   findByIdAndDelete(remove) {
     return vehicles.findByIdAndDelete({ remove });
   }
+  findOne(email){
+    return vehicles.findOne({email})
+  }
 }
+
