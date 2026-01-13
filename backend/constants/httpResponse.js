@@ -18,6 +18,15 @@ export const Messege = {
   VEHICLE_UPDATED: "Vehicle updated successfully",
   VEHICLE_DELETED: "Vehicle retired successfully",
   VEHICLE_NOT_FOUND: "Vehicle not found",
+  VEHICLE_ALREADY_FOUND : "this vehicle already saved",
+  VEHICLE_NOT_CREATED : 'vehicles not created',
+  VEHICLE_NOT_UPDATED : "vehicles not updated",
+  VEHICLE_NOT_DELETED : "vehicles not deleted",
+  VEHICLE_FOUND : "vehicles founded",
+  VEHICLE_NOT_FOUNDED: "vehicles not founded",
+
+
+
 
   // Deliveries
   DELIVERY_CREATED: "Delivery task created",

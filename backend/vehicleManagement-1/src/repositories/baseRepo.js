@@ -14,4 +14,8 @@ export class BaseRepository {
   find(users) {
     throw new Error("not implimented || not added");
   }
+
+  findOne(email) {
+    throw new Error("not implimented || not added")
+  }
 }
