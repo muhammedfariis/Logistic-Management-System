@@ -17,8 +17,7 @@ const AuthSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "dispatcher", "driver"],
-      default: "admin",
+      enum: ["admin", "dispatcher", "driver" , "user"],
     },
   },
   { timestamps: true }
