@@ -5,8 +5,15 @@ class VehicleControllers {
 
   createVehicles = async (req, res, next) => {
     try {
-      const created = await this.VehicleServices.createVehicles(req.body);
-      res.json(created);
+      const created = await this.VehicleServices.createVehicles({
+        ...req.body ,
+        addedBy: req.user.id
+      });
+      res.json({
+        success : true,
+        ...created ,
+
+      });
     } catch (err) {
       next(err);
     }
@@ -14,7 +21,10 @@ class VehicleControllers {
 
   updateVehicles = async (req, res, next) => {
     try {
-      const updated = await this.VehicleServices.updateVehicles(req.body);
+      const updated = await this.VehicleServices.updateVehicles({
+       id: req.params.id,  
+      ...req.body
+      });
       res.json(updated);
     } catch (err) {
       next(err);

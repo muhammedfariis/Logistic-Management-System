@@ -12,7 +12,7 @@ const schema = new mongoose.Schema(
     vehiclesType: {
       type: String,
       enum: ["truck", "minitruck", "van", "container"],
-      default: true,
+      required: true,     
     },
 
     brand: {
@@ -23,6 +23,7 @@ const schema = new mongoose.Schema(
 
     year: {
       type: Number,
+      required: true,
     },
 
     status: {
@@ -53,14 +54,14 @@ const schema = new mongoose.Schema(
     },
 
     insuranceExpiry: {
-      type : Date,
-      required : true
+      type: Date,
+      required: true,
     },
-    polutionExpiry:{
-      type : Date,
-      required : true
+
+    polutionExpiry: {
+      type: Date,
+      required: true,
     },
-    
   },
   { timestamps: true }
 );

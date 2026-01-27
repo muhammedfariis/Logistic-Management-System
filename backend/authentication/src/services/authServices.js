@@ -1,7 +1,7 @@
 import { ApiError } from "../../../Errors/Error.js";
 import { Messege, Status } from "../../../constants/httpResponse.js";
 import logger from "../../../log/logger.js";
-import { tokengenarator } from "../../../utils/jwt.js";
+import { generateToken } from "../../../utils/jwt.js";
 import { passwordHash, comparePassword } from "../../../utils/passHash.js";
 
 class AuthService {
@@ -9,7 +9,6 @@ class AuthService {
     this.UserRepository = UserRepository;
   }
   async register({ userName, email, password, role }) {
-
     const existing = await this.UserRepository.findOne(email);
     if (existing) {
       throw new ApiError(Status.CONFLICT, Messege.USER_EXIST);
@@ -27,10 +26,11 @@ class AuthService {
     if (!user) {
       throw new ApiError(Status.BAD_REQUEST, Messege.INVALID_CREDENTIALS);
     }
-
+    const tokens = generateToken({ _id: user._id, role: user.role });
     return {
       message: Messege.REGISTER_SUCCESS,
       user,
+      tokens,
     };
   }
 
@@ -42,7 +42,8 @@ class AuthService {
     }
     const compare = comparePassword(password, user.password);
     logger.debug("password compared");
-    const tokens = tokengenarator(user._id);
+
+    const tokens = generateToken({ _id: user._id, role: user.role });
     if (!tokens) {
       throw new ApiError(Status.UNAUTHORIZED, Messege.VALIDATION_ERROR);
     }
@@ -53,15 +54,15 @@ class AuthService {
     };
   }
 
-  async getAllUsers(){
-    const getting = await this.UserRepository.find()
-    if(!getting){
-      throw new ApiError(Status.NOT_FOUND , Messege.USER_NOT_FOUND)
+  async getAllUsers() {
+    const getting = await this.UserRepository.find();
+    if (!getting) {
+      throw new ApiError(Status.NOT_FOUND, Messege.USER_NOT_FOUND);
     }
-    return{
-      user : getting._id,
-      getting
-    }
+    return {
+      user: getting._id,
+      getting,
+    };
   }
 }
 

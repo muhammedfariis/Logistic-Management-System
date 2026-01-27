@@ -1,15 +1,13 @@
 import vehicleComposer from "../composers/vehiclesComposers.js";
-import UserRoles from "../../../middlewares/roleMiddleware.js"
-import Auth from "../../../middlewares/authMiddleware.js"
 import express from "express"
-
+import roleMiddleware from "../../../middlewares/roleMiddleware.js";
+import Validation from "../../../middlewares/authMiddleware.js" 
 const vehicles = vehicleComposer()
 const router = express.Router()
-
-router.get("/allvehicles", Auth, UserRoles("admin"), vehicles.readVehicles);
-router.post("/insertvehicle", Auth, UserRoles("admin"), vehicles.createVehicles);
-router.put("/updatevehicles", Auth, UserRoles("admin"), vehicles.updateVehicles);
-router.delete("/deletevehicles", Auth, UserRoles("admin"), vehicles.deleteVehicles);
+router.get("/allvehicles",Validation,roleMiddleware("admin") , vehicles.readVehicles);
+router.post("/insertvehicle",Validation, roleMiddleware("admin"), vehicles.createVehicles);
+router.put("/updatevehicles", Validation, roleMiddleware("admin"), vehicles.updateVehicles);
+router.delete("/deletevehicles",Validation, roleMiddleware("admin"), vehicles.deleteVehicles);
 
 
 export default router

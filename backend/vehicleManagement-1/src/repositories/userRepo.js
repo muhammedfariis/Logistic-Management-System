@@ -2,20 +2,26 @@ import { BaseRepository } from "./baseRepo.js";
 import vehicles from "../models/vehicle.js";
 
 export class UserRepository extends BaseRepository {
-  create(user) {
-    return vehicles.create(user);
+
+  create(data) {
+    return vehicles.create(data);
   }
-  find(users) {
-    return vehicles.find(users);
+
+  find(query) {
+    return vehicles.find(query);
   }
-  findByIdAndUpdate(update) {
-    return vehicles.findByIdAndUpdate({ update });
+
+  findByIdAndUpdate(id, data) {
+    return vehicles.findByIdAndUpdate(id, data, { new: true });
   }
-  findByIdAndDelete(remove) {
-    return vehicles.findByIdAndDelete({ remove });
+
+  findByIdAndDelete(id) {
+    return vehicles.findByIdAndDelete(id);
   }
-  findOne(email){
-    return vehicles.findOne({email})
+
+  findOne(query) {
+    return vehicles.findOne(query);
   }
 }
+
 

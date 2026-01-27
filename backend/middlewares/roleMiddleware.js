@@ -1,20 +1,19 @@
-import { Messege, Status } from "../constants/httpResponse.js";
+// middlewares/roleMiddleware.js
 import { ApiError } from "../Errors/Error.js";
-import logger from "../log/logger.js";
+import { Status, Messege } from "../constants/httpResponse.js";
 
-const roleMiddleware = (...roles) => {
-  logger.debug("Rolemiddleware working");
-
+const roleMiddleware = (...allowedRoles) => {
   return (req, res, next) => {
+
     if (!req.user || !req.user.role) {
-      throw new ApiError(Status.UNAUTHORIZED, Messege.TOKEN_INVALID);
+      return next(new ApiError(Status.UNAUTHORIZED, Messege.TOKEN_INVALID));
     }
 
-    logger.debug("ROLE FROM TOKEN:", req.user.role);
-    logger.debug("ALLOWED ROLES:", roles);
+    console.log("User role:", req.user.role);
+    console.log("Allowed roles:", allowedRoles);
 
-    if (!roles.includes(req.user.role)) {
-      throw new ApiError(Status.FORBIDDEN, Messege.ACCESS_DENIED);
+    if (!allowedRoles.includes(req.user.role)) {
+      return next(new ApiError(Status.FORBIDDEN, Messege.ACCESS_DENIED));
     }
 
     next();
