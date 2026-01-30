@@ -51,5 +51,3 @@ class VehicleControllers {
 }
 
 export default VehicleControllers;
-
-let b= 10
